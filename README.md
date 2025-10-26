@@ -36,3 +36,44 @@ Analysis & plots
 Outputs are saved under outputs/ (models, figures); the final report PDF (if generated) appears in /content or outputs/.
 
 If you want GPU: Runtime → Change runtime type → GPU.
+
+
+
+Local setup (recommended: conda)
+Option A — Using conda (recommended):
+# create environment
+conda env create -f environment.yml
+conda activate loan_rl
+
+# install extra pip packages if needed
+pip install -r requirements.txt
+
+
+
+Option B — Using venv + pip:
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+
+Recommended requirements.txt
+pandas>=1.5
+numpy>=1.23
+scikit-learn>=1.1
+matplotlib>=3.5
+seaborn>=0.11
+torch>=2.0
+d3rlpy>=0.57
+shap>=0.41
+gymnasium>=0.28
+jupyterlab
+notebook
+tqdm
+cloudpickle
+
+Notes
+- Install the correct torch wheel for your CUDA version (or CPU-only) using PyTorch official install instructions.
+- d3rlpy may show gym / gymnasium compatibility warnings. These are often non-fatal; if you hit runtime errors, try installing gymnasium and reinstalling d3rlpy:
+  pip install gymnasium
+  pip install --force-reinstall d3rlpy
+- If your notebook imports like from d3rlpy.metrics import DiscreteFQEConfig fail, remove or replace that import and use alternative evaluators available in your d3rlpy version (e.g., TDErrorEvaluator) — the notebook already contains a fix.
