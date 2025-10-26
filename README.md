@@ -57,19 +57,19 @@ pip install -r requirements.txt
 
 
 ### Recommended requirements.txt
-pandas>=1.5
-numpy>=1.23
-scikit-learn>=1.1
-matplotlib>=3.5
-seaborn>=0.11
-torch>=2.0
-d3rlpy>=0.57
-shap>=0.41
-gymnasium>=0.28
-jupyterlab
-notebook
-tqdm
-cloudpickle
+- pandas>=1.5
+- numpy>=1.23
+- scikit-learn>=1.1
+- matplotlib>=3.5
+- seaborn>=0.11
+- torch>=2.0
+- d3rlpy>=0.57
+- shap>=0.41
+- gymnasium>=0.28
+- jupyterlab
+- notebook
+- tqdm
+- cloudpickle
 
 ### Notes
 - Install the correct torch wheel for your CUDA version (or CPU-only) using PyTorch official install instructions.
@@ -80,7 +80,7 @@ cloudpickle
 
 ### How to run the notebook end-to-end (headless)
 
-To execute the notebook and save an executed copy:
+- To execute the notebook and save an executed copy:
 pip install nbconvert
 jupyter nbconvert --to notebook --execute \
   policy_optimization_Rajat_Satonkar_22ucs160.ipynb \
