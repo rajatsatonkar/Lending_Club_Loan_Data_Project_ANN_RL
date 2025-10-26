@@ -1,0 +1,13 @@
+pandas>=1.5
+numpy>=1.23
+scikit-learn>=1.1
+matplotlib>=3.5
+seaborn>=0.11
+torch>=2.0
+d3rlpy>=0.57
+shap>=0.41
+gymnasium>=0.28
+jupyterlab
+notebook
+tqdm
+cloudpickle
