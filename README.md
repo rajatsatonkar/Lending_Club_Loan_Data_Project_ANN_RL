@@ -77,3 +77,30 @@ Notes
   pip install gymnasium
   pip install --force-reinstall d3rlpy
 - If your notebook imports like from d3rlpy.metrics import DiscreteFQEConfig fail, remove or replace that import and use alternative evaluators available in your d3rlpy version (e.g., TDErrorEvaluator) — the notebook already contains a fix.
+
+How to run the notebook end-to-end (headless)
+
+To execute the notebook and save an executed copy:
+pip install nbconvert
+jupyter nbconvert --to notebook --execute \
+  policy_optimization_Rajat_Satonkar_22ucs160.ipynb \
+  --ExecutePreprocessor.timeout=3600 \
+  --output outputs/executed_policy_optimization.ipynb
+
+How the RL problem is framed (short technical recap)
+
+State (s): 40 SHAP-selected features (preprocessed).
+
+Action (a): {0: Deny, 1: Approve}.
+
+Reward (r):
+
+Deny → 0
+
+Approve & Fully Paid → + loan_amnt * int_rate
+
+Approve & Defaulted → - loan_amnt
+
+Setting: One-step contextual bandit (each loan is an independent decision); offline RL (learn from logged dataset without live interaction).
+
+Algorithms used / recommended: Behaviour Cloning (BC) baseline; Conservative Q-Learning (CQL) or BCQ for robust offline RL.
