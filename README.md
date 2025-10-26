@@ -90,12 +90,19 @@ jupyter nbconvert --to notebook --execute \
 ## How the RL problem is framed (short technical recap)
 
 State (s): 40 SHAP-selected features (preprocessed).
+
 Action (a): {0: Deny, 1: Approve}.
+
 Reward (r):
+
 Deny → 0
+
 Approve & Fully Paid → + loan_amnt * int_rate
+
 Approve & Defaulted → - loan_amnt
+
 Setting: One-step contextual bandit (each loan is an independent decision); offline RL (learn from logged dataset without live interaction).
+
 Algorithms used / recommended: Behaviour Cloning (BC) baseline; Conservative Q-Learning (CQL) or BCQ for robust offline RL.
 
 ## Evaluation & metrics
@@ -109,39 +116,62 @@ Algorithms used / recommended: Behaviour Cloning (BC) baseline; Conservative Q-L
 ## Reproducibility checklist
 
 Set random seeds (numpy, torch, random).
+
 Save preprocessing objects (scaler, encoders) with pickle.
+
 Save model checkpoints and hyperparameters to outputs/models/.
+
 Freeze environment if needed: pip freeze > requirements_freeze.txt.
+
 Example seed snippet to put at the top of the notebook:
+
 SEED = 42
+
 import numpy as np, random, torch
+
 np.random.seed(SEED)
+
 random.seed(SEED)
+
 torch.manual_seed(SEED)
 
 ## Common issues & fixes
 
 ImportError: DiscreteFQEConfig — remove or replace that import; use TDErrorEvaluator or equivalent in your d3rlpy version.
+
 gym / gymnasium conflicts — install gymnasium and reinstall d3rlpy, or pin compatible versions.
+
 Torch/CUDA mismatch — use the correct PyTorch wheel for your CUDA; verify torch.cuda.is_available().
 
 ## Recommended analysis & next steps (for your report)
 
 Compute EPV with confidence intervals using robust OPE methods.
+
 Train conservative offline RL (CQL), compare EPV vs BC and thresholded classifier policies.
+
 Address logged-data bias (accepted-loans dataset). Consider:
+
 Collecting outcomes for historically denied applications (if possible), or
+
 Running a controlled pilot/A–B test (shadow mode) to gather unbiased feedback.
+
 Add business constraints (portfolio-level limits, exposure caps).
+
 Build explainability: SHAP for classifier; feature contributions to Q-values for RL to explain policy behavior.
+
 Deploy cautiously: shadow mode → small pilot → monitor EPV and default rates before full rollout.
 
 ## Expected outputs (after running notebook)
 
+
 outputs/models/dl_model.pth — supervised classifier weights
+
 outputs/models/rl_cql.pkl (or similar) — offline RL agent checkpoint
+
 outputs/figures/ — ROC, EPV comparisons, decision examples
+
 outputs/executed_policy_optimization.ipynb — end-to-end executed notebook
+
 final_report_policy_optimization_Rajat_Satonkar_22ucs160.pdf — concise final report (2–3 pages) summarizing Task 4 findings
 
 ## License & contact
